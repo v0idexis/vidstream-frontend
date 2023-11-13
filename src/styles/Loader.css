@@ -1,0 +1,15 @@
+.loader {
+  height: 100dvh;
+  width: 100vw;
+  position: fixed;
+  display: flex;
+  z-index: 999999;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+}
