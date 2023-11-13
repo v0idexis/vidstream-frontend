@@ -11,12 +11,16 @@ function Player() {
 
   useEffect(async () => {
     try {
-      while (loading) {
-        let wakeStatus = await (await fetch(`${server}/wake`, { method: "GET" })).json();
-        if (wakeStatus.status === 'running') {
-          setLoading(false);
+      async function checkWake() {
+        while (loading) {
+          let wakeStatus = await (await fetch(`${server}/wake`, { method: "GET" })).json();
+          if (wakeStatus.status === 'running') {
+            setLoading(false);
+            break;
+          }
         }
       }
+      checkWake();
     }
     catch (err) {
       console.log(err);
@@ -59,7 +63,7 @@ function Player() {
       <>
         <div className='loader'>
           <img alt="Loader" src={loadingGif} style={{ width: '200px' }} />
-          <h3 style={{ 'max-width': '80vw' }}>This project is hosted on a free server, waiting for the server to cold start. May take a few minutes</h3>
+          <h3 style={{ maxWidth: '80vw' }}>This project is hosted on a free server, waiting for the server to cold start. May take a few minutes</h3>
         </div>
       </> :
       <>
