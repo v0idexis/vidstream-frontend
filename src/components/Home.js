@@ -1,4 +1,3 @@
-// import logo from './logo.svg';41
 import { useEffect, useState } from 'react';
 import '../styles/Loader.css';
 import '../styles/Home.css';

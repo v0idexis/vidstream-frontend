@@ -1,12 +1,29 @@
-// import logo from './logo.svg';41
 import { useEffect, useState } from 'react';
 import '../styles/Player.css';
-// import logo from '../assets/clapperboard.png';
+import '../styles/Loader.css';
+import loadingGif from '../assets/loading.gif';
 
 function Player() {
+  const [loading, setLoading] = useState(true);
   const server = 'https://vidstream-server-o9cb.onrender.com';
   const [result, setResult] = useState({ src: '', splash: '', poster: '', title: '', year: '', desc: '' });
   const [activeServer, setActiveServer] = useState(1);
+
+  useEffect(async () => {
+    try {
+      while (loading) {
+        let wakeStatus = await (await fetch(`${server}/wake`, { method: "GET" })).json();
+        if (wakeStatus.status === 'running') {
+          setLoading(false);
+        }
+      }
+    }
+    catch (err) {
+      console.log(err);
+    }
+
+  }, [])
+
 
   useEffect(() => {
     let urlParams = new URLSearchParams(window.location.search);
@@ -23,7 +40,7 @@ function Player() {
           let movieData = await (await fetch(`${server}/movie/details/${encodeURIComponent(movieId)}`, { method: "GET" })).json();
           console.log(movieData)
           // console.log(movieObj)
-          setResult({ src: 'movieLink', splash: movieData.backdrop, poster: movieData.poster, title: movieData.title, year: movieData.year, desc: movieData.description });
+          setResult({ src: movieLink, splash: movieData.backdrop, poster: movieData.poster, title: movieData.title, year: movieData.year, desc: movieData.description });
         }
         catch (err) {
           console.log(err);
@@ -38,26 +55,33 @@ function Player() {
   }, [activeServer]);
 
   return (
-    <>
-      <div className="page-container">
-        <div className="splash" style={{ background: `linear-gradient(transparent, black), url(${result.splash}) no-repeat` }}></div>
-        <div className="media-block">
-          <iframe title="MoviePlayer" className="player-window" src={result.src} frameborder="0" sandbox> </iframe>
-          <div className='server-selector'>
-            <div className='server-button' onClick={() => setActiveServer(1)}>Server 1</div>
-            <div className='server-button' onClick={() => setActiveServer(2)}>Server 2</div>
-          </div>
-          <div className="info-container">
-            <img className="poster" alt="Movie Poster" src={result.poster} />
-            <div className="media-info">
-              <div className="media-title">{result.title}</div>
-              <div className="media-year">{result.year}</div>
-              <div className="media-desc">{result.desc}</div>
+    (loading) ?
+      <>
+        <div className='loader'>
+          <img alt="Loader" src={loadingGif} style={{ width: '200px' }} />
+          <h3 style={{ 'max-width': '80vw' }}>This project is hosted on a free server, waiting for the server to cold start. May take a few minutes</h3>
+        </div>
+      </> :
+      <>
+        <div className="page-container">
+          <div className="splash" style={{ background: `linear-gradient(transparent, black), url(${result.splash}) no-repeat` }}></div>
+          <div className="media-block">
+            <iframe title="MoviePlayer" className="player-window" src={result.src} frameborder="0" sandbox> </iframe>
+            <div className='server-selector'>
+              <div className='server-button' onClick={() => setActiveServer(1)}>Server 1</div>
+              <div className='server-button' onClick={() => setActiveServer(2)}>Server 2</div>
+            </div>
+            <div className="info-container">
+              <img className="poster" alt="Movie Poster" src={result.poster} />
+              <div className="media-info">
+                <div className="media-title">{result.title}</div>
+                <div className="media-year">{result.year}</div>
+                <div className="media-desc">{result.desc}</div>
+              </div>
             </div>
           </div>
-        </div>
-      </div >
-    </>
+        </div >
+      </>
   );
 }
 
