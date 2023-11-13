@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import '../styles/Loader.css';
 import '../styles/Home.css';
 import logo from '../assets/clapperboard.png';
+import moviePlaceholder from '../assets/movieplaceholder.png';
 import loadingGif from '../assets/loading.gif';
 
 function Home() {
@@ -65,7 +66,7 @@ function Home() {
                 {results.map((item) => {
                   return (<>
                     <div className="result" id={item.id} onClick={() => { window.open(`/player?source=${item.id}`) }}>
-                      <img className="res-thumb" alt={item.title} src={item.poster} />
+                      <img className="res-thumb" alt={item.title} src={!String(item.poster).includes('originalnull') ? item.poster : moviePlaceholder} />
                       <div className="res-info">
                         <div className="res-title">{item.title}</div>
                         <div className="res-year">{item.year}</div>
