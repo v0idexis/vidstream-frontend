@@ -1,0 +1,164 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: black;
+  padding: 0;
+  color: white;
+  /* Change my color to yellow */
+  margin: 0;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  /*   align-items: center; */
+  font-family: "Lato", sans-serif;
+}
+
+.page-container {
+  position: relative;
+  width: 100vw;
+  /*   padding-top: 5vh; */
+  min-height: 100vh;
+}
+
+.splash {
+  height: 80vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  /*   justify-content: center; */
+  align-items: center;
+  /*   padding-top: 10vh; */
+  overflow: scroll;
+  /* background: linear-gradient(transparent, black),
+    url("https://4kwallpapers.com/images/walls/thumbs_2t/11773.jpg") no-repeat; */
+  background-size: 100vw 100%, cover;
+}
+
+.server-selector {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 10px;
+}
+
+.server-button {
+  padding: 5px;
+  background: white;
+  border-radius: 100px;
+  color: black;
+  font-weight: 900;
+  font-size: 12px;
+  cursor: pointer;
+  text-transform: uppercase;
+  padding-left: 10px;
+  padding-right: 10px;
+  transition: ease all 0.5s;
+}
+
+.server-button:hover {
+  background: #2c2c2c;
+  color: white;
+  transform: scale(1.2);
+  transition: ease all 0.5s;
+}
+
+.media-block {
+  position: absolute;
+  padding: 5vh 0px 10vh;
+  top: 0px;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5vh;
+}
+
+.horizontal-divider {
+  height: 1px;
+  background: gray;
+  width: 100%;
+}
+
+.player-window {
+  aspect-ratio: 16 / 9;
+  width: 80vw;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.info-container {
+  width: 80vw;
+  display: flex;
+  gap: 5%;
+}
+
+.poster {
+  width: 15vw;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.media-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+.media-title {
+  font-size: 34px;
+  line-height: 40px;
+  font-weight: 600;
+}
+
+.media-year {
+  font-size: 26px;
+  font-weight: 300;
+  margin-bottom: 5px;
+  color: white;
+}
+
+.media-desc {
+  font-size: 22px;
+  font-weight: 200;
+  color: white;
+}
+
+@media only screen and (max-width: 600px) {
+  .splash {
+    height: 50vh;
+  }
+
+  .poster {
+    width: 15vw;
+    height: 20vw;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .media-info {
+    gap: 5px;
+  }
+
+
+  .media-title {
+    font-size: 24px;
+    line-height: 40px;
+    font-weight: 600;
+  }
+
+  .media-year {
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 5px;
+    color: white;
+  }
+
+  .media-desc {
+    font-size: 18px;
+    font-weight: 200;
+    color: white;
+  }
+}
