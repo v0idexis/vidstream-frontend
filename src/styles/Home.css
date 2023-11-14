@@ -19,6 +19,11 @@
 .landing {
   height: 100vh;
   width: 100vw;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
   display: flex;
   flex-direction: column;
   /*   justify-content: center; */
