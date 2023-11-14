@@ -31,17 +31,16 @@ function Home() {
   }, [])
 
   useEffect(() => {
-    async function fetchSearch() {
+    (async () => {
       if (query !== '') {
         let movieData = await fetch(`${server}/search?q=${encodeURIComponent(query)}`, { method: "GET" });
         let movieObj = await movieData.json();
         setResults(movieObj.body);
       }
       else {
-        setResults([]);
+        setTimeout(() => { setResults([]) }, 1000);
       }
-    }
-    fetchSearch();
+    })();
   }, [query]);
 
   return (
@@ -65,7 +64,7 @@ function Home() {
               <div className="search-results">
                 {results.map((item) => {
                   return (<>
-                    <div className="result" id={item.id} onClick={() => { window.open(`/player?source=${item.id}`) }}>
+                    <div key={item.id} className="result" id={item.id} onClick={() => { window.open(`/player?source=${item.id}`) }}>
                       <img className="res-thumb" alt={item.title} src={!String(item.poster).includes('originalnull') ? item.poster : moviePlaceholder} />
                       <div className="res-info">
                         <div className="res-title">{item.title}</div>
@@ -75,7 +74,6 @@ function Home() {
                     </div>
                     <div className="horizontal-divider"></div>
                   </>)
-
                 })}
               </div >
             </>
