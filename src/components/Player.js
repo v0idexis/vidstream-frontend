@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import '../styles/Player.css';
-import '../styles/Loader.css';
-import loadingGif from '../assets/loading.gif';
+import Loader from './Loader'
 
 function Player() {
   const [loading, setLoading] = useState(true);
@@ -60,12 +59,8 @@ function Player() {
 
   return (
     (loading) ?
-      <>
-        <div className='loader'>
-          <img alt="Loader" src={loadingGif} style={{ width: '200px' }} />
-          <h3 style={{ maxWidth: '80vw' }}>This project is hosted on a free server, waiting for the server to cold start. May take a few minutes</h3>
-        </div>
-      </> :
+      <Loader />
+      :
       <>
         <div className="page-container">
           <div className="splash" style={{ background: `linear-gradient(transparent, black), url(${result.splash}) no-repeat` }}></div>

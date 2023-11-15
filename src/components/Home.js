@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import '../styles/Loader.css';
 import '../styles/Home.css';
 import logo from '../assets/clapperboard.png';
 import moviePlaceholder from '../assets/movieplaceholder.png';
-import loadingGif from '../assets/loading.gif';
+import Loader from './Loader'
 
 function Home() {
   const [loading, setLoading] = useState(true);
@@ -45,14 +44,13 @@ function Home() {
 
   return (
     (loading) ?
-      <>
-        <div className='loader'>
-          <img alt="Loader" src={loadingGif} style={{ width: '200px' }} />
-          <h3 style={{ maxWidth: '80vw' }}>This project is hosted on a free server, waiting for the server to cold start. May take a few minutes</h3>
-        </div>
-      </> :
+      <Loader />
+      :
       <>
         <div className="landing">
+          <div className='landing-spinner-box'>
+            <img className='landing-spinner' src={logo}></img>
+          </div>
           <div className="logo_container">
             <img alt="vidstream_logo" className="logo" src={logo} />
             <p style={{ margin: "0px" }}>Vidstream</p>
